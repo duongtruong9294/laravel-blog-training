@@ -13,7 +13,7 @@ class NewsRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,18 +24,24 @@ class NewsRequest extends FormRequest
     public function rules()
     {
         return [
-            'username' => 'required|min:4|max:30',
-            'password' => 'required|min:6|max:30',
+            'name' => 'required|min:10|max:50',
+            'category_id' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'description' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Username is required',
-            'name.min' => 'The Username must have at least 4 characters',
-            'name.max' => 'The Username must have at most 30 characters',
-            'parent_id.required'  => 'Parent Category is require',
+            'name.required' => 'Name is required',
+            'name.min' => 'Name must have at least 10 characters',
+            'name.max' => 'Name must have at most 50 characters',
+            'category_id.required'  => 'Parent Category is require',
+            'image.required' => 'Image is required',
+            'image.mimes' => 'Picture extension is jpeg,png,jpg,gif,svg',
+            'image.max' => 'Image must have at most 2048 characters',
+            'description.required' => 'Description is required'
         ];
     }
 }

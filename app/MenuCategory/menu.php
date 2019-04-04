@@ -37,4 +37,18 @@
              }
   		}
   	}
+
+    // function MenuView($categories,$id) {
+    //   foreach ($categories as $abc ) {
+    //     if ($abc->parent_id === $id) {
+    //       // echo '<li><a href="#">'.$abc->name.'</a></li>';
+    //       echo '<li class="drop-down"><a href="#!">'.$category->name.'<i class="ion-ios-arrow-right"></i></a>'
+    //               '<ul class="drop-down-menu drop-down-inner">'
+    //                 MenuView($categories,$category->id)
+    //               '</ul>'
+    //             '</li>';
+    //       // MenuView($categories,$abc->id);
+    //     }
+    //   }
+    // }
  ?>

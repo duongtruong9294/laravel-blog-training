@@ -41,15 +41,22 @@ Route::group(['namespace' => 'Admin'], function() {
 
 		Route::group(['prefix' => 'news'], function () {
 			Route::get('', ['as' => 'adminnews', 'uses' => 'NewsController@index']);
-			// Route::get('create', ['as' => 'adminaddnews', 'uses' => 'NewsController@create']);
-			// Route::post('post', ['as' => 'adminaddnews', 'uses' => 'NewsController@store']);
-			// Route::get('/{news}/edit',['as' => 'admineditnews', 'uses' => 'NewsController@edit']);
-			// Route::patch('/{news}/update',['as' => 'adminupdatenews', 'uses' => 'NewsController@update']);
-			// Route::delete('/{news}/del',['as' => 'admindelnews', 'uses' => 'NewsController@destroy']);
+			Route::get('create',['as' => 'adminaddnews', 'uses' => 'NewsController@create']);
+			Route::post('post', ['as' => 'adminaddnews', 'uses' => 'NewsController@store']);
+			Route::get('{news}',['as' => 'adminnewnews', 'uses' => 'NewsController@new']);
+			Route::get('/{news}/edit',['as' => 'admineditnews', 'uses' => 'NewsController@edit']);
+			Route::patch('/{news}/update',['as' => 'adminupdatenews', 'uses' => 'NewsController@update']);
+			Route::delete('/{news}/del',['as' => 'admindelnews', 'uses' => 'NewsController@destroy']);
 		});
 
 		Route::get('/login',['as' => 'adminlogin', 'uses' => 'LoginController@create']);
 		Route::post('/login',['as' => 'adminlogin', 'uses' => 'LoginController@store']);
 		Route::get('/logout',['as' => 'adminlogout', 'uses' => 'LoginController@destroy']);
 	});
+});
+
+Route::group(['namespace' => 'Frontend'], function() {
+	Route::resource('', 'HomeController');
+	Route::get('news/search', ['as' => 'search', 'uses' => 'HomeController@search']);
+	Route::resource('news', 'NewsController');
 });

@@ -1,6 +1,6 @@
 @extends('admin.master')
 @section('title', 'Add Category')
-section('content')
+
 <div class="dashboard-wrapper">
 	<div class="container-fluid dashboard-content">
 		<div class="row">
@@ -34,4 +34,3 @@ section('content')
 		</div>
 	</div>
 </div>
-@endsection
