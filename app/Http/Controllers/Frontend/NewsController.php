@@ -11,7 +11,12 @@ use App\User;
 class NewsController extends Controller
 {
     public function show($id) {
-    	$new = New::with('categories')->with('users')->find($id);
-    	return view('frontend.news.show');
+    	$new = News::with('categories')->with('users')->find($id);
+    	return view('frontend.news.show', compact('new'));
+    }
+
+    public function postBycate($id) {
+    	$news_by_cate = News::with('categories')->with('users')->where('category_id',$id)->get();
+    	return view('frontend.news.post_detail_cate', compact('news_by_cate'));
     }
 }

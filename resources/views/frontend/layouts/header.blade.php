@@ -46,11 +46,7 @@
 						@if ($category->parent_id === 0)
 							<li class="drop-down"><a href="#!">{{ $category->name }}<i class="ion-ios-arrow-right"></i></a>
 								<ul class="drop-down-menu drop-down-inner">
-									@foreach($categories as $abc)
-										@if ($abc->parent_id === $category->id)
-											<li><a href="#">{{ $abc->name }}</a></li>
-										@endif
-									@endforeach
+									<?php echo MenuView($categories,$category->id); ?>
 								</ul>
 							</li>
 						@endif

@@ -49,6 +49,16 @@ Route::group(['namespace' => 'Admin'], function() {
 			Route::delete('/{news}/del',['as' => 'admindelnews', 'uses' => 'NewsController@destroy']);
 		});
 
+		// Route::resource('tags','TagController');
+		Route::group(['prefix' => 'tags'], function () {
+			Route::get('',['as' => 'admintags', 'uses' => 'TagController@index']);
+			Route::get('create',['as' => 'admincreatetag', 'uses' => 'TagController@create']);
+			Route::post('store',['as' => 'adminstoretag', 'uses' => 'TagController@store']);
+			Route::delete('{tag}/del',['as' => 'admindeltag', 'uses' => 'TagController@destroy']);
+			Route::get('{tag}/edit',['as' => 'adminedittag', 'uses' => 'TagController@edit']);
+			Route::patch('{tag}/update',['as' => 'adminupdatetag', 'uses' => 'TagController@update']);
+		});	
+
 		Route::get('/login',['as' => 'adminlogin', 'uses' => 'LoginController@create']);
 		Route::post('/login',['as' => 'adminlogin', 'uses' => 'LoginController@store']);
 		Route::get('/logout',['as' => 'adminlogout', 'uses' => 'LoginController@destroy']);
@@ -59,4 +69,5 @@ Route::group(['namespace' => 'Frontend'], function() {
 	Route::resource('', 'HomeController');
 	Route::get('news/search', ['as' => 'search', 'uses' => 'HomeController@search']);
 	Route::resource('news', 'NewsController');
+	Route::get('/category/{category}/posts',['as' => 'postbycate', 'uses' => 'NewsController@postBycate']);
 });

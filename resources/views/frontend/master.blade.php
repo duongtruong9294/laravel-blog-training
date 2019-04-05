@@ -24,6 +24,10 @@
 	<link href="{{ asset('resource/frontend/01-homepage/css/styles.css') }}" rel="stylesheet">
 
 	<link href="{{ asset('resource/frontend/01-homepage/css/responsive.css') }}" rel="stylesheet">
+	<!-- Stylesheets -->
+	<link href="{{ asset('resource/frontend/02-Single-post/css/styles.css') }}" rel="stylesheet">
+
+	<link href="{{ asset('resource/frontend/02-Single-post/css/responsive.css') }}" rel="stylesheet">
 
 </head>
 <body>

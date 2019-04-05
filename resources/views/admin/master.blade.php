@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="{{ asset('resource/admin/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('resource/admin/assets/vendor/charts/c3charts/c3.css') }}">
     <link rel="stylesheet" href="{{ asset('resource/admin/assets/vendor/fonts/flag-icon-css/flag-icon.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('resource/tags/dist/bootstrap-tagsinput.css') }}">
+    <link rel="stylesheet" href="{{ asset('resource/tags/custom.css') }}">
     <title>@yield('title')</title>
 </head>
 
@@ -76,6 +79,11 @@
     <script src="{{ asset('resource/admin/assets/vendor/charts/c3charts/d3-5.4.0.min.js') }}"></script>
     <script src="{{ asset('resource/admin/assets/vendor/charts/c3charts/C3chartjs.js') }}"></script>
     <script src="{{ asset('resource/admin/assets/libs/js/dashboard-ecommerce.js') }}"></script>
+
+    <script src="{{ asset('resource/tags/dist/bootstrap-tagsinput.min.js') }}"></script>
+
+   <!--  <script src="assets/app_bs3.js"></script>
+    <script src="assets/app_bs3.js"></script> -->
 
 </body>
     @yield('js')

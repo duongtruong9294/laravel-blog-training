@@ -12,7 +12,7 @@
 
 						<div class="icons">
 							<div class="left-area">
-								<a class="btn caegory-btn" href="#"><b>{{ $new->categories->name }}</b></a>
+								<a class="btn caegory-btn" href="{{ route('postbycate',$new->categories->id) }}"><b>{{ $new->categories->name }}</b></a>
 							</div>
 							<ul class="right-area social-icons">
 								<li><a href="#"><i class="ion-android-share-alt"></i>Share</a></li>
@@ -27,8 +27,8 @@
 					</div><!-- single-post -->
 					@endforeach
 						<a class="btn load-more-btn" target="_blank" href="#">LOAD OLDER POSTS</a>
-					</div><!-- blog-posts -->
-				</div><!-- col-lg-4 -->
+				</div><!-- blog-posts -->
+			</div><!-- col-lg-4 -->
 				<div class="col-lg-4 col-md-12">
 					<div class="sidebar-area">
 
@@ -131,27 +131,6 @@
 
 						</div><!-- sidebar-section latest-post-area -->
 
-						<div class="sidebar-section advertisement-area">
-							<h4 class="title"><b class="light-color">Advertisement</b></h4>
-							<a class="advertisement-img" href="#">
-								<img src="{{ asset('resource/frontend/images/advertise-1-400x500.jpg') }}" alt="Advertisement Image">
-								<h6 class="btn btn-2 discover-btn">DISCOVER</h6>
-							</a>
-						</div><!-- sidebar-section advertisement-area -->
-
-						<div class="sidebar-section instagram-area">
-							<h4 class="title"><b class="light-color">Instagram</b></h4>
-							<ul class="instagram-img">
-								<li><a href="#"><img src="{{ asset('resource/frontend/images/instragram-side-1-150x150.jpg') }}" alt="Instagram Image"></a></li>
-								<li><a href="#"><img src="{{ asset('resource/frontend/images/instragram-side-2-150x150.jpg') }}" alt="Instagram Image"></a></li>
-								<li><a href="#"><img src="{{ asset('resource/frontend/images/instragram-side-3-150x150.jpg') }}" alt="Instagram Image"></a></li>
-								<div class="clearfix"></div>
-								<li><a href="#"><img src="{{ asset('resource/frontend/images/instragram-side-4-150x150.jpg') }}" alt="Instagram Image"></a></li>
-								<li><a href="#"><img src="{{ asset('resource/frontend/images/instragram-side-5-150x150.jpg') }}" alt="Instagram Image"></a></li>
-								<li><a href="#"><img src="{{ asset('resource/frontend/images/instragram-side-6-150x150.jpg') }}" alt="Instagram Image"></a></li>
-							</ul>
-						</div><!-- sidebar-section instagram-area -->
-
 						<div class="sidebar-section tags-area">
 							<h4 class="title"><b class="light-color">Tags</b></h4>
 							<ul class="tags">
@@ -167,6 +146,7 @@
 					</div><!-- about-author -->
 				</div><!-- col-lg-4 -->
 			</div><!-- row -->
+			@include('frontend.layouts.leftslide')
 		</div><!-- container -->
 	</section><!-- section -->
 @endsection
