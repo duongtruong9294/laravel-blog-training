@@ -14,9 +14,9 @@
 		<div class="right-area">
 
 			<div class="src-area">
-				<form action="{{ route('search') }}" method="post">
-					<input class="src-input" type="text" placeholder="Search" name="name" id="key">
-					<button class="src-btn" id="search" type="button"><i class="ion-ios-search-strong"></i></button>
+				<form action="{{ route('index') }}" method="get">
+					<input class="src-input" type="text" placeholder="Search" name="search" id="key">
+					<button type="submit" class="src-btn" id="search" type="button"><i class="ion-ios-search-strong"></i></button>
 				</form>
 			</div><!-- src-area -->
 
@@ -44,7 +44,7 @@
 				<ul class="drop-down-menu">
 					@foreach($categories as $category)
 						@if ($category->parent_id === 0)
-							<li class="drop-down"><a href="#!">{{ $category->name }}<i class="ion-ios-arrow-right"></i></a>
+							<li class="drop-down"><a href="{{ route('postbycate',$category->id) }}">{{ $category->name }}<i class="ion-ios-arrow-right"></i></a>
 								<ul class="drop-down-menu drop-down-inner">
 									<?php echo MenuView($categories,$category->id); ?>
 								</ul>
@@ -53,10 +53,7 @@
 					@endforeach
 				</ul>
 			</li>
-			<li><a href="#">FEATURED</a></li>
-			<li><a href="#">ABOUT</a></li>
-			<li><a href="#">CATEGORIES</a></li>
-			<li><a href="#">CONTACT</a></li>
+			<li><a href="#">LOGIN</a></li>
 		</ul><!-- main-menu -->
 	</div><!-- conatiner -->
 </header>

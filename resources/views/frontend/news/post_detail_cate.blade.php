@@ -3,7 +3,6 @@
 <section class="section blog-area">
 	<div class="container">
 		<div class="row">
-
 			<div class="col-lg-8 col-md-12">
 				<div class="blog-posts">
 					@foreach($news_by_cate as $new)
@@ -26,7 +25,9 @@
 						<a class="btn read-more-btn" href="{{ route('news.show', $new->id) }}"><b>READ MORE</b></a>
 					</div><!-- single-post -->
 					@endforeach
-						<a class="btn load-more-btn" target="_blank" href="#">LOAD OLDER POSTS</a>
+					<div>
+						{{ $news_by_cate->links() }}
+					</div>
 					</div><!-- blog-posts -->
 				</div><!-- col-lg-4 -->
 				@include('frontend.layouts.leftslide')

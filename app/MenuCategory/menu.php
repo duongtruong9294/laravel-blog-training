@@ -39,10 +39,11 @@
   	}
 
     function MenuView($categories,$id) {
+      $content = '';
       foreach ($categories as $abc ) {
         if ($abc->parent_id === $id) {
-          // echo '<li><a href="#">'.$abc->name.'</a></li>';
-          return '<li class="drop-down"><a href="#!">'.$abc->name.'<i class="ion-ios-arrow-right"></i></a>'.
+          $url = asset('category/'.$abc->id.'/posts');
+          $content.= '<li class="drop-down"><a href='."$url".'>'.$abc->name.'<i class="ion-ios-arrow-right"></i></a>'.
                   '<ul class="drop-down-menu drop-down-inner">'.
                       MenuView($categories,$abc->id).
                   '</ul>'.
@@ -50,5 +51,6 @@
           // MenuView($categories,$abc->id);
         }
       }
+      return $content;
     }
  ?>

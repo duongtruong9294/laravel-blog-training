@@ -1,10 +1,10 @@
 @extends('admin.master')
 @section('title', 'Edit Category')
-section('content')
+@section('content')
 <div class="dashboard-wrapper">
 	<div class="container-fluid dashboard-content">
 		<div class="row">
-			<div class="col-xl-9 col-lg-12 col-md-12 col-sm-6 col-12 offset-md-2">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 				<div class="section-block" id="basicform">
 					<h3 class="section-title">Edit Category</h3>
 				</div>

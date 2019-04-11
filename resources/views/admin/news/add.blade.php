@@ -3,7 +3,7 @@
 <div class="dashboard-wrapper">
 	<div class="container-fluid dashboard-content">
 		<div class="row">
-			<div class="col-xl-9 col-lg-12 col-md-12 col-sm-6 col-12 offset-md-2">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 				<div class="section-block" id="basicform">
 					<h3 class="section-title">Add News</h3>
 				</div>
@@ -40,7 +40,13 @@
                                 <textarea class="form-control" id="description" rows="3" name="description"></textarea>
                             </div>
 							<div>
-								<button type="submit" class="btn btn-primary">Submit</button>
+								<label for="inputText3" class="col-form-label">Tags</label><br/>
+								<input type="text" value="" data-role="tagsinput" id="tags" name="tags" />
+							</div>
+							
+
+							<div>
+								<button type="submit" class="btn btn-primary" style="margin-top: 20px;">Submit</button>
 							</div>
 						</form>
 					</div>
@@ -48,9 +54,45 @@
 			</div>
 		</div>
 	</div>
+	<div class="footer">
+	    <div class="container-fluid">
+	        <div class="row">
+	            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+	                 Copyright © 2018 Concept. All rights reserved. Dashboard by <a href="https://colorlib.com/wp/">Colorlib</a>.
+	            </div>
+	            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+	                <div class="text-md-right footer-links d-none d-sm-block">
+	                    <a href="javascript: void(0);">About</a>
+	                    <a href="javascript: void(0);">Support</a>
+	                    <a href="javascript: void(0);">Contact Us</a>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 </div>
 
-<script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
-<script>
-    CKEDITOR.replace( 'description' );
+<!-- <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script> -->
+@section('js')
+<script type="text/javascript">
+	
+	var tags = new Bloodhound({
+	  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+	  queryTokenizer: Bloodhound.tokenizers.whitespace,
+	  prefetch: {
+	    url: 'create/json',
+	  }
+	});
+
+	tags.initialize();
+
+	$('#tags').tagsinput({
+	  typeaheadjs: {
+	    name: 'tags',
+	    displayKey: 'name',
+    	valueKey: 'name',
+	    source: tags.ttAdapter()
+	  }
+	});
 </script>
+@endsection

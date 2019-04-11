@@ -10,9 +10,18 @@ use App\User;
 
 class HomeController extends Controller
 {
-    public function index() {
-    	$news = News::with('categories')->with('users')->get();
-    	return view('frontend.home.index', compact('news'));
+    public function index(Request $request) {
+        $search = $request->search;
+        $news = News::with('categories')->with('users');
+        if (isset($request->search)){
+            $news = $news->where('username','like','%'. $request->search .'%');
+        }
+        $news = $news->where('status',1)->orderBy('created_at','desc')->get();
+        // foreach ($news as $key) {
+        //     $key->username = str_replace( $search, '<b style="color:red">'.$search.'</b>', $key->username);
+        // }
+
+    	return view('frontend.home.index', compact('news','search'));
     }
 
     public function search(Request $request) {

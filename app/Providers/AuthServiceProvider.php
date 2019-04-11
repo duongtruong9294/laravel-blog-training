@@ -3,7 +3,11 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
+use App\Policies\NewsPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\News;
+use App\User;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,6 +18,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Model' => 'App\Policies\ModelPolicy',
+        News::class => NewsPolicy::class,
+        User::class => UserPolicy::class
     ];
 
     /**
@@ -25,6 +31,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::resource('news', NewsPolicy::class);
+        // Gate::define('post.new', NewsPolicy::class . '@new');
+        Gate::resource('users', UserPolicy::class);
+
+        Gate::before(function ($user) {
+            if($user->id === 1){
+                return true;
+            }
+        });
     }
 }

@@ -24,7 +24,11 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->parent_id = $request->parent_id;
         $category->save();
-        return redirect()->route('admincate');
+        if($category) {
+            return redirect()->route('admincate')->with('success','Created Category successfully!');
+        }else{
+            return redirect()->route()->with('error','Created Category False !!!');
+        }
     }
 
     public function edit($id) {
@@ -37,7 +41,11 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $category->name = $request->name;
         $category->save();
-        return redirect()->route('admincate');
+        if($category) {
+            return redirect()->route('admincate')->with('success','Updated Category successfully!');
+        }else{
+            return redirect()->route()->with('error','Updated Category False !!!');
+        }
     }
 
     public function destroy(Request $request,$id) {

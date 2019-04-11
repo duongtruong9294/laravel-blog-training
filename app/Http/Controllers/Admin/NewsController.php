@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\News;
 use App\Category;
 use App\User;
+use App\Tag;
 use App\Http\Requests\Admin\NewsRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -14,16 +15,17 @@ use Illuminate\Support\Facades\File;
 class NewsController extends Controller
 {
 	public function index() {
-		$news = News::with('categories')->with('users')->get();
+		$news = News::with('categories')->with('users')->paginate(10);
 		return view('admin.news.index', compact('news'));
 	}
 
 	public function create() {
 		$data = Category::select('id','name','parent_id')->get();
-		return view('admin.news.add', compact('data'));
+		$tags = Tag::select('id','name')->get();
+		return view('admin.news.add', compact('data', 'tags'));
 	}
 
-	public function store(NewsRequest $request) {
+	public function store(Request $request) {
 		$news = new News();
     	$news->username = $request->name;
     	$image = $request->file('image');
@@ -38,26 +40,37 @@ class NewsController extends Controller
 	 	$news->category_id = $request->category_id;
 	 	$news->user_id = Auth::user()->id;
 	 	$news->status = 1;
-	 	if ($news->save()) {
-	 		return redirect()->route('adminnews');
+	 	$news->save();
+	 	if($news) {
+	 		$tagList = explode(",", $request->tags);
+			foreach ($tagList as $tags) {
+			    $tag = Tag::where('name', '=', $tags)->first();
+			    if ($tag != null) {
+			        $news->tags()->sync($tag->id);
+			    } else {
+			        $tag = new Tag();
+			        $tag->name = $tags;
+			        $tag->save();
+			        $news->tags()->sync($tag->id);
+			    }
+			}
+			return redirect()->route('adminnews')->with('success','Created New successfully!');
 	 	}else{
-	 		return redirect()->back();
+	 		return redirect()->back()->with('error','Created New False !!!');
 	 	}
 	}
 
-	public function edit($id) {
+	public function edit(News $news) {
+		// $new = News::find($id);
 		$data = Category::select('id','name','parent_id')->get();
-		$new = News::find($id);
-		return view('admin.news.edit', compact('data', 'new'));
+		return view('admin.news.edit', compact('data', 'news'));
 	}
 
-	public function update(NewsRequest $request, $id) {
-		$new = News::find($id);
-
-		$new->username = $request->name;
+	public function update(NewsRequest $request, News $news) {
+		$news->username = $request->name;
     	$image = $request->file('image');
     	if (strlen ($image) > 0 ) {
-    		$image_path = public_path("images/news/{$new->image}");
+    		$image_path = public_path("images/news/{$news->image}");
     		if (File::exists($image_path)) {
 		        File::delete($image_path);
 		    }
@@ -65,16 +78,29 @@ class NewsController extends Controller
 	    	$input['image'] = time().'.'.$image->getClientOriginalExtension();
 	    	$destinationPath = public_path('images/news');
 	    	$image->move($destinationPath, $input['image']);
-		 	$new->image = $input['image'];
+		 	$news->image = $input['image'];
     	}
-    	$new->description = $request->description;
-	 	$new->category_id = $request->category_id;
-	 	$new->user_id = Auth::user()->id;
-	 	$new->status = 1;
-	 	if ($new->save()) {
-	 		return redirect()->route('adminnews');
+    	$news->description = $request->description;
+	 	$news->category_id = $request->category_id;
+	 	$news->user_id = Auth::user()->id;
+	 	$news->status = 1;
+	 	$news->save();
+	 	if ($news) {
+	 		$tagList = explode(",", $request->tags);
+			foreach ($tagList as $tags) {
+			    $tag = Tag::where('name', '=', $tags)->first();
+			    if ($tag != null) {
+			        $news->tags()->sync($tag->id);
+			    } else {
+			        $tag = new Tag();
+			        $tag->name = $tags;
+			        $tag->save();
+			        $news->tags()->sync($tag->id);
+			    }
+			}
+	 		return redirect()->route('adminnews')->with('success','Updated New successfully!');
 	 	}else{
-	 		return redirect()->back();
+	 		return redirect()->back()->with('error','Updated New False !!!');
 	 	}
 	}
 
@@ -82,24 +108,30 @@ class NewsController extends Controller
 		$new = News::find($id);
 		$new->status = 1;
 		if ($new->save()) {
-			return redirect()->route('adminnews');
+			return redirect()->route('adminnews')->with('success','Updated Status successfully!');
 		}else{
-			return redirect()->back();
+			return redirect()->back()->with('error','Updated Status False !!!');
 		}
 	}
 
-	public function destroy($id) {
-		$new = News::find($id);
-		if (strlen ($new->image) > 0){
-			$image_path = public_path("images/news/{$new->image}");
+	public function destroy(News $news) {
+		// $new = News::find($id);
+		if (strlen ($news->image) > 0){
+			$image_path = public_path("images/news/{$news->image}");
 			if (File::exists($image_path)) {
 		        File::delete($image_path);
 		    }
 		}
-		if ($new->delete($id)) {
-			return redirect()->route('adminnews');
+		if ($news->delete($id)) {
+			return redirect()->route('adminnews')->with('success','Deleted Status successfully!');
 		}else{
-			return redirect()->back();
+			return redirect()->back()->with('error','Deleted Status False !!!');
 		}
+	}
+
+	public function json(Request $request) {
+		return response()->json([
+        	'success' => $tags
+        ]);
 	}
 }

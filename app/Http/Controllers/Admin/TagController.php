@@ -10,7 +10,7 @@ use App\Tag;
 class TagController extends Controller
 {
     public function index() {
-    	$tags = Tag::all();
+    	$tags = Tag::paginate(10);
     	return view('admin.tags.index', compact('tags'));
     }
 
@@ -22,9 +22,9 @@ class TagController extends Controller
     	$tag = new Tag();
     	$tag->name = $request->name;
     	if($tag->save()){
-    		return redirect()->route('admintags');
+    		return redirect()->route('admintags')->with('success','Created Tag successfully!');
     	}else{
-    		return redirect()->route('admintags');
+    		return redirect()->route('admintags')->with('error','Created Tag False !!!');
     	}
     }
 
@@ -37,18 +37,18 @@ class TagController extends Controller
     	$tag = Tag::find($id);
     	$tag->name = $request->name;
     	if ($tag->save()){
-    		return redirect()->route('admintags');
+    		return redirect()->route('admintags')->with('success','Updated Tag successfully!');
     	}else{
-    		return redirect()->route('admintags');
+    		return redirect()->route('admintags')->with('error','Updated Tag False !!!');
     	}
     }
 
     public function destroy($id) {
     	$tag = Tag::find($id);
     	if ($tag->delete($id)) {
-    		return redirect()->route('admintags');
+    		return redirect()->route('admintags')->with('success','Deleted Tag successfully!');
     	}else{
-    		return redirect()->route('admintags');
+    		return redirect()->route('admintags')->with('error','Deleted Tag False !!!');
     	}
     }
 }

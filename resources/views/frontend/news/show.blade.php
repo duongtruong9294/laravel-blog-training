@@ -50,10 +50,10 @@
 							<p class="date"><em>Monday, October 13, 2017</em></p>
 							<h3 class="title"><b class="light-color">{{ $new->username }}</b></h3>
 							<p class="desc">{{ $new->description }}</p>
-
 							<ul>
-								<li><a class="btn" href="#">design</a></li>
-								<li><a class="btn" href="#">fashion</a></li>
+								@foreach($new->tags as $tag)
+									<li><a class="btn" href="{{ route('postbytag', $tag->id) }}">{{ $tag->name }}</a></li>
+								@endforeach
 							</ul>
 
 						</div><!-- single-post -->
