@@ -1,7 +1,8 @@
 <?php
 	use App\Category;
-
+	use Illuminate\Support\Facades\Auth;
 	$categories = Category::select('id','name','parent_id')->get();
+	
  ?>
 
 <header>
@@ -53,7 +54,12 @@
 					@endforeach
 				</ul>
 			</li>
-			<li><a href="#">LOGIN</a></li>
+			@if (!Auth::check())
+				<li><a href="{{ route('adminlogin') }}">LOGIN</a></li>
+				<li><a href="{{ route('register') }}">REGISTER</a></li>
+			@else
+				<li><a href="{{ route('adminlogout') }}">LOGOUT</a></li>
+    		@endif
 		</ul><!-- main-menu -->
 	</div><!-- conatiner -->
 </header>

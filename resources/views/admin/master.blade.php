@@ -80,16 +80,12 @@
     <!-- main js -->
     <script src="{{ asset('resource/admin/assets/libs/js/main-js.js') }}"></script>
     <!-- chart chartist js -->
-    <script src="{{ asset('resource/admin/assets/vendor/charts/chartist-bundle/chartist.min.js') }}"></script>
     <!-- sparkline js -->
     <script src="{{ asset('resource/admin/assets/vendor/charts/sparkline/jquery.sparkline.js') }}"></script>
     <!-- morris js -->
     <script src="{{ asset('resource/admin/assets/vendor/charts/morris-bundle/raphael.min.js') }}"></script>
     <script src="{{ asset('resource/admin/assets/vendor/charts/morris-bundle/morris.js') }}"></script>
     <!-- chart c3 js -->
-    <script src="{{ asset('resource/admin/assets/vendor/charts/c3charts/c3.min.js') }}"></script>
-    <script src="{{ asset('resource/admin/assets/vendor/charts/c3charts/d3-5.4.0.min.js') }}"></script>
-    <script src="{{ asset('resource/admin/assets/vendor/charts/c3charts/C3chartjs.js') }}"></script>
     <script src="{{ asset('resource/admin/assets/libs/js/dashboard-ecommerce.js') }}"></script>
 
     <script src="{{ asset('resource/tags/dist/bootstrap-tagsinput.min.js') }}"></script>
@@ -139,6 +135,13 @@
     <script src="{{ asset('resource/tags/assets/typeahead.bundle.js') }}"></script>
 
     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+
+    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 
 </body>

@@ -16,7 +16,7 @@ class HomeController extends Controller
         if (isset($request->search)){
             $news = $news->where('username','like','%'. $request->search .'%');
         }
-        $news = $news->where('status',1)->orderBy('created_at','desc')->get();
+        $news = $news->where('status',1)->orderBy('created_at','desc')->paginate(5);
         // foreach ($news as $key) {
         //     $key->username = str_replace( $search, '<b style="color:red">'.$search.'</b>', $key->username);
         // }

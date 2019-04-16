@@ -10,7 +10,7 @@ use App\Category;
 class CategoryController extends Controller
 {
     public function index() {
-        $data = Category::select('id','name','parent_id')->get();
+        $data = Category::select('id','name','parent_id')->orderBy('created_at','desc')->get();
     	return view('admin.categories.index', compact('data'));
     }
 

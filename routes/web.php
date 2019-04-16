@@ -79,4 +79,6 @@ Route::group(['namespace' => 'Frontend'], function() {
 	Route::resource('news', 'NewsController');
 	Route::get('/category/{category}/posts',['as' => 'postbycate', 'uses' => 'NewsController@postBycate']);
 	Route::get('/tag/{tag}/posts',['as' => 'postbytag', 'uses' => 'NewsController@postBytag']);
+	Route::get('/register',['as' => 'register', 'uses' => 'UserController@create']);
+	Route::post('/store',['as' => 'store', 'uses' => 'UserController@store']);
 });

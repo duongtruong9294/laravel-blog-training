@@ -53,11 +53,6 @@
 @section('js')
     <script type="text/javascript">
 		$(document).ready(function(){
-			$('#table_id').DataTable(
-				paging: true,
-				searching: true,
-   				ordering:  true
-			);
 			$('.btn-danger').click(function() {
 				event.preventDefault();
 				var id = $(this).attr('data-id');

@@ -19,7 +19,7 @@
 					    </div>
 					@endif
 					<div class="card-body">
-						<form action="{{ route('adminaddnews') }}" method="POST" enctype="multipart/form-data">
+						<form action="{{ route('adminstorenews') }}" method="POST" enctype="multipart/form-data">
 							@csrf
 							<div class="form-group">
 								<label for="inputText3" class="col-form-label">Name</label>
@@ -37,13 +37,22 @@
 							</div>
 							<div class="form-group">
                                 <label for="exampleFormControlTextarea1">Description</label>
-                                <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+                                <textarea class="form-control" id="summary-ckeditor" rows="3" name="description"></textarea>
                             </div>
-							<div>
+
+						<!-- 	<div>
 								<label for="inputText3" class="col-form-label">Tags</label><br/>
 								<input type="text" value="" data-role="tagsinput" id="tags" name="tags" />
+							</div> -->
+
+							<div>
+								<label for="password">Tags</label><br/>
+								<select class="form-control js-example-tokenizer" multiple="multiple" name="tags[]">
+								  	@foreach($tags as $tag)
+								  		<option selected="selected" value="{{ $tag->name }}">{{$tag->name}}</option>
+								  	@endforeach
+								</select>
 							</div>
-							
 
 							<div>
 								<button type="submit" class="btn btn-primary" style="margin-top: 20px;">Submit</button>
@@ -75,24 +84,36 @@
 <!-- <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script> -->
 @section('js')
 <script type="text/javascript">
+	CKEDITOR.replace( 'summary-ckeditor' );
+
+	$(".js-example-tokenizer").select2({
+	    tags: true,
+	    tokenSeparators: [',', ' ']
+	})
 	
-	var tags = new Bloodhound({
-	  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-	  queryTokenizer: Bloodhound.tokenizers.whitespace,
-	  prefetch: {
-	    url: 'create/json',
-	  }
-	});
+	// var tags = new Bloodhound({
+	//   datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+	//   queryTokenizer: Bloodhound.tokenizers.whitespace,
+	//   prefetch: {
+	//     url: 'create/json',
+	//     filter: function(list) {
+	//       	return $.map(list, function(tags) {
+	//         return { name: tags }; });
+	//     }
+	//   }
+	// });
 
-	tags.initialize();
+	// tags.initialize();
 
-	$('#tags').tagsinput({
-	  typeaheadjs: {
-	    name: 'tags',
-	    displayKey: 'name',
-    	valueKey: 'name',
-	    source: tags.ttAdapter()
-	  }
-	});
+	// $('#tags').tagsinput({
+	//   typeaheadjs: {
+	//     name: 'tags',
+	//     displayKey: 'name',
+ //    	valueKey: 'name',
+	//     source: tags.ttAdapter()
+	//   }
+	// });
+
+
 </script>
 @endsection

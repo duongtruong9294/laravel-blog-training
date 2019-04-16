@@ -9,12 +9,11 @@
 		<div class="row">
 			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 				<div class="card">
-					<h5 class="card-header">List User</h5>
 					<div class="card-body p-0">
 						<div class="table-responsive">
-							<table class="table">
-								<thead class="bg-light">
-									<tr class="border-0">
+							<table class="display" id="myTable">
+								<thead >
+									<tr >
 										<th class="border-0">ID</th>
 										<th class="border-0">Name</th>
 										<th class="border-0">User</th>
@@ -22,7 +21,9 @@
 										<th class="border-0">Image</th>
 										<th class="border-0">Description</th>
 										<th class="border-0">Status</th>
-										<th class="border-0" colspan="3">Action</th>
+										<th class="border-0"></th>
+										<th class="border-0"></th>
+										<th class="border-0"></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -88,3 +89,10 @@
 </div>		
 @endsection
 extends('admin.layouts.footer')
+@section('js')
+<script type="text/javascript">
+	$(document).ready( function () {
+   	 	$('#myTable').DataTable();
+	} );
+</script>
+@endsection

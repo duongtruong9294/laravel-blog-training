@@ -11,12 +11,13 @@
 					<h5 class="card-header">List Tag</h5>
 					<div class="card-body p-0">
 						<div class="table-responsive">
-							<table class="table">
+							<table class="table" id="myTable">
 								<thead class="bg-light">
 									<tr class="border-0">
 										<th class="border-0">ID</th>
 										<th class="border-0">Name</th>
-										<th class="border-0" colspan="2">Action</th>
+										<th class="border-0"></th>
+										<th class="border-0"></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -64,4 +65,11 @@
 	    </div>
 	</div>
 </div>
+@endsection
+@section('js')
+	<script type="text/javascript">
+		$(document).ready( function () {
+   	 		$('#myTable').DataTable();
+		} );
+	</script>
 @endsection

@@ -40,7 +40,7 @@
 							</div>
 							<div class="form-group">
                                 <label for="exampleFormControlTextarea1">Description</label>
-                                <textarea class="form-control" id="description" rows="3" name="description">{{ $news->description }}</textarea>
+                                <textarea class="form-control" id="summary-ckeditor" rows="3" name="description">{{ $news->description }}</textarea>
                             </div>
 							<div>
 								<label for="inputText3" class="col-form-label">Tags</label><br/>
@@ -75,7 +75,7 @@
 
 <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
 <script>
-    // CKEDITOR.replace( 'description' );
+    CKEDITOR.replace( 'summary-ckeditor' );
 
 	var tags = new Bloodhound({
 	  	datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),

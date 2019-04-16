@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\File;
 class NewsController extends Controller
 {
 	public function index() {
-		$news = News::with('categories')->with('users')->paginate(10);
+		$news = News::with('categories')->with('users')->orderBy('created_at','desc')->paginate(10);
 		return view('admin.news.index', compact('news'));
 	}
 
@@ -26,6 +26,7 @@ class NewsController extends Controller
 	}
 
 	public function store(Request $request) {
+		
 		$news = new News();
     	$news->username = $request->name;
     	$image = $request->file('image');
@@ -39,19 +40,18 @@ class NewsController extends Controller
     	$news->description = $request->description;
 	 	$news->category_id = $request->category_id;
 	 	$news->user_id = Auth::user()->id;
-	 	$news->status = 1;
+	 	$news->status = 0;
 	 	$news->save();
 	 	if($news) {
-	 		$tagList = explode(",", $request->tags);
-			foreach ($tagList as $tags) {
+			foreach ($request->tags as $tags) {
 			    $tag = Tag::where('name', '=', $tags)->first();
 			    if ($tag != null) {
-			        $news->tags()->sync($tag->id);
+			        $news->tags()->attach($tag->id);
 			    } else {
 			        $tag = new Tag();
 			        $tag->name = $tags;
 			        $tag->save();
-			        $news->tags()->sync($tag->id);
+			        $news->tags()->attach($tag->id);
 			    }
 			}
 			return redirect()->route('adminnews')->with('success','Created New successfully!');
@@ -67,6 +67,7 @@ class NewsController extends Controller
 	}
 
 	public function update(NewsRequest $request, News $news) {
+		// dd($request->all());
 		$news->username = $request->name;
     	$image = $request->file('image');
     	if (strlen ($image) > 0 ) {
@@ -82,20 +83,18 @@ class NewsController extends Controller
     	}
     	$news->description = $request->description;
 	 	$news->category_id = $request->category_id;
-	 	$news->user_id = Auth::user()->id;
-	 	$news->status = 1;
 	 	$news->save();
 	 	if ($news) {
 	 		$tagList = explode(",", $request->tags);
 			foreach ($tagList as $tags) {
 			    $tag = Tag::where('name', '=', $tags)->first();
 			    if ($tag != null) {
-			        $news->tags()->sync($tag->id);
+			        $news->tags()->attach($tag->id);
 			    } else {
 			        $tag = new Tag();
 			        $tag->name = $tags;
 			        $tag->save();
-			        $news->tags()->sync($tag->id);
+			        $news->tags()->attach($tag->id);
 			    }
 			}
 	 		return redirect()->route('adminnews')->with('success','Updated New successfully!');

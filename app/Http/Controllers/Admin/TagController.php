@@ -10,7 +10,7 @@ use App\Tag;
 class TagController extends Controller
 {
     public function index() {
-    	$tags = Tag::paginate(10);
+    	$tags = Tag::orderBy('created_at','desc')->paginate(10);
     	return view('admin.tags.index', compact('tags'));
     }
 

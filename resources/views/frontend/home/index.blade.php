@@ -6,7 +6,7 @@
 
 			<div class="col-lg-8 col-md-12">
 				<div class="blog-posts">
-					@foreach($news as $new)
+					@forelse($news as $new)
 					<div id="{{'news'.$new->id}}" class="single-post">
 						<div class="image-wrapper"><img src="{{ asset('images/news/'.$new->image) }}" style="width: 730; height: 438px;" alt="Blog Image">
 						</div>
@@ -25,7 +25,12 @@
 						<p>{{ $new->description }}</p>
 						<a class="btn read-more-btn" href="{{ route('news.show', $new->id) }}"><b>READ MORE</b></a>
 					</div>
-					@endforeach
+					@empty
+   						 <h2 style="color: red;">No Result</h2>
+					@endforelse
+					<div>
+						{{ $news->links() }}
+					</div>
 				</div><!-- blog-posts -->
 			</div><!-- col-lg-4 -->
 				@include('frontend.layouts.leftslide')
