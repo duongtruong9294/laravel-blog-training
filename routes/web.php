@@ -13,7 +13,7 @@
 
 use App\Tag;
 
-Route::get('/', function () {
+Route::get('/1', function () {
     return view('welcome');
 });
 
@@ -81,4 +81,11 @@ Route::group(['namespace' => 'Frontend'], function() {
 	Route::get('/tag/{tag}/posts',['as' => 'postbytag', 'uses' => 'NewsController@postBytag']);
 	Route::get('/register',['as' => 'register', 'uses' => 'UserController@create']);
 	Route::post('/store',['as' => 'store', 'uses' => 'UserController@store']);
+	Route::get('/verifyEmailFirst',['as' => 'verifyEmailFirst', 'uses' => 'UserController@verifyEmailFirst']);
+	Route::get('/verify/{email}/{token_verify}',['as' => 'sendEmailDone', 'uses' => 'UserController@sendEmailDone']);
+
+
+	
+	// Route::get('/send', ['as' => 'send', 'uses' => 'SendMessageController@index']);
+	Route::post('/postMessage', ['as' => 'postMessage', 'uses' =>'SendMessageController@sendMessage']);
 });

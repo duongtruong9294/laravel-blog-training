@@ -8,11 +8,13 @@ use App\News;
 use App\Category;
 use App\User;
 use App\Tag;
+use App\Comment;
 
 class NewsController extends Controller
 {
     public function show($id) {
-    	$new = News::with('categories')->with('users')->find($id);
+    	$new = News::with('categories')->with('users')->with('comments')->find($id);
+        // $comments = Comment::with('user')->with('new')->orderBy('created_at','desc')->get();
     	return view('frontend.news.show', compact('new'));
     }
 

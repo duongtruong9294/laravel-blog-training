@@ -4,9 +4,12 @@ namespace App;
 use App\Tag;
 
 use Illuminate\Database\Eloquent\Model;
+use willvincent\Rateable\Rateable;
 
 class News extends Model
 {
+    use Rateable;
+
     protected $table = 'news';
 
     public function tags() {
@@ -30,4 +33,8 @@ class News extends Model
     // {
     //     return $query->where('status', false);
     // }
+
+    public function comments() {
+        return $this->hasMany('App\Comment','new_id');
+    }
 }

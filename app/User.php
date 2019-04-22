@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','token_verify'
     ];
 
     /**
@@ -63,6 +63,10 @@ class User extends Authenticatable
     public function inRole(string $roleSlug)
     {
         return $this->roles()->where('slug', $roleSlug)->count() == 1;
+    }
+
+    public function comments() {
+        return $this->hasMany('App\Comment');
     }
 
 }

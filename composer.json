@@ -12,7 +12,11 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
-        "unisharp/laravel-ckeditor": "^4.7"
+        "pusher/pusher-php-server": "^3.4",
+        "spatie/laravel-backup": "^6.1",
+        "symfony/process": "^4.2",
+        "unisharp/laravel-ckeditor": "^4.7",
+        "willvincent/laravel-rateable": "^1.07"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
